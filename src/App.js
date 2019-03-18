@@ -1,28 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import {
+  Home,
+  Login,
+  Register,
+  Write,
+  Policy,
+  User,
+  Saves,
+  Settings,
+  NotFound
+} from "pages";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/:mode(trending|recent|tags)" component={Home} />
+        <Route path="/write" component={Write} />
+
+        <Route exact path="/@:username/" component={User} />
+        <Route exact path="/@:username/tags/:tag" component={User} />
+        <Route
+          exact
+          path="/@:username/:tab(history|about|series)"
+          component={User}
+        />
+
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+
+        <Route path="/policy/:mode(policy|terms)" component={Policy} />
+        <Route path="/saves" component={Saves} />
+        <Route path="/settings" component={Settings} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
+  );
+};
 
 export default App;
