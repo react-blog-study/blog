@@ -1,0 +1,21 @@
+.LoginButton {
+  font-weight: 600;
+  color: #495057;
+  border: 1px solid #495057;
+  padding: 0.5rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.2s all;
+
+  &:hover {
+    color: #845ef7;
+    border: 1px solid #845ef7;
+  }
+
+  &:active {
+    /* 마우스 클릭시 아래로 미세하게 움직임 */
+    transform: translateY(3px);
+  }
+}
