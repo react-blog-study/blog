@@ -1,0 +1,35 @@
+.LoginTemplate {
+  display: flex;
+  align-content: center;
+  height: 100%;
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    color: #fff;
+    background: #343a40;
+    padding-left: 6rem;
+    padding-right: 6rem;
+
+    .logo {
+      font-size: 3rem;
+      line-height: 3rem;
+      font-weight: 600;
+      font-family: Inconsolata;
+    }
+
+    h2 {
+      margin-top: 5rem;
+    }
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background: #f1f3f5;
+  }
+}
