@@ -12,6 +12,7 @@ import {
   NotFound
 } from "pages";
 import { hot } from "react-hot-loader";
+import Core from "containers/Base/Core";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/settings" component={Settings} />
         <Route component={NotFound} />
       </Switch>
+      <Core />
     </>
   );
 };

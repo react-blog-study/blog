@@ -3,14 +3,22 @@ import { Link } from "react-router-dom";
 import { IoLogoGithub, IoLogoFacebook, IoLogoGoogle } from "react-icons/io";
 
 import "./LoginForm.scss";
-const LoginForm = () => {
+const LoginForm = ({ email, onChangeEmail, onSendAuthEmail }) => {
   return (
     <div className="LoginForm">
       <h2>지금, 벨로그를 시작하세요.</h2>
       <div className="auth-form">
         <div className="input-with-button">
-          <input className="email" placeholder="이메일을 입력해주세요" />
-          <div className="startButton">시작하기</div>
+          <input
+            className="email"
+            placeholder="이메일을 입력해주세요"
+            name="email"
+            value={email}
+            onChange={onChangeEmail}
+          />
+          <div className="startButton" onClick={onSendAuthEmail}>
+            시작하기
+          </div>
         </div>
         <div className="separator">
           <div className="or">OR</div>

@@ -1,0 +1,11 @@
+.NanoBar {
+}
+
+.nanobar {
+  position: relative;
+  .bar {
+    position: absolute;
+    top: 0;
+    background: rgb(121, 80, 242);
+  }
+}
