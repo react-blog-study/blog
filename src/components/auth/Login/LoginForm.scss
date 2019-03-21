@@ -59,8 +59,10 @@
       background: #ced4da;
       margin-top: 2rem;
       margin-bottom: 2rem;
+      position: relative;
       .or {
-        width: 20px;
+        position: absolute;
+        left: 50%;
         transform: translate(-50%, -50%);
         background: #fff;
         padding-left: 0.5rem;
