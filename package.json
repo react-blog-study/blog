@@ -20,7 +20,8 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-pender": "^2.0.12",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^0.86.0",
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-scripts start",

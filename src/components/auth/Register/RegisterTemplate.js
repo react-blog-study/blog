@@ -1,12 +1,18 @@
 import React from "react";
 import "./RegisterTemplate.scss";
-const RegisterTemplate = () => {
+import { Link } from "react-router-dom";
+const RegisterTemplate = ({ children }) => {
   return (
-    <div className="container">
-      <div className="wrapper">
-        <div className="left">left</div>
-        <div className="right">right</div>
+    <div className="RegisterTemplate">
+      <div className="header">
+        <Link className="link" to="/login">
+          velog
+        </Link>
+        <div className="light">
+          <span>/</span>회원가입
+        </div>
       </div>
+      <div className="section">{children}</div>
     </div>
   );
 };

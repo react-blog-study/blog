@@ -4,6 +4,8 @@ import LoginForm from "components/auth/Login/LoginForm";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "store/modules/auth";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 
 class LoginContainer extends Component {
   handleChangeEmail = e => {
@@ -13,7 +15,9 @@ class LoginContainer extends Component {
   };
 
   handleSendAuthEmail = async () => {
-    const { email, AuthActions, history } = this.props;
+    const { email, AuthActions, history, location } = this.props;
+    console.log(location);
+
     try {
       await AuthActions.sendAuthEamil(email);
       const { isUser } = this.props;
@@ -23,7 +27,6 @@ class LoginContainer extends Component {
       }
 
       /* 회원가입처리*/
-      console.log(history);
       history.push("/register");
     } catch (e) {
       console.log(e);
@@ -46,11 +49,16 @@ class LoginContainer extends Component {
   }
 }
 
-export default connect(
-  ({ auth }) => ({
-    email: auth.registerForm.email
-  }),
-  dispatch => ({
-    AuthActions: bindActionCreators(authActions, dispatch)
-  })
-)(LoginContainer);
+const enhance = compose(
+  withRouter,
+  connect(
+    ({ auth }) => ({
+      email: auth.registerForm.email
+    }),
+    dispatch => ({
+      AuthActions: bindActionCreators(authActions, dispatch)
+    })
+  )
+);
+
+export default enhance(LoginContainer);
