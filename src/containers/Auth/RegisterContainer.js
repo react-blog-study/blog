@@ -6,7 +6,6 @@ import { bindActionCreators, compose } from "redux";
 import * as authActions from "store/modules/auth";
 import { isEmail, isLength, isAlphanumeric } from "validator";
 import { withRouter } from "react-router-dom";
-import enhance from "./LoginContainer";
 
 class RegisterContainer extends Component {
   setError = message => {
