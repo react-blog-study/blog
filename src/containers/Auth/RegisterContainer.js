@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import RegisterTemplate from "components/auth/Register/RegisterTemplate";
-import RegisterForm from "components/auth/Register/RegisterForm";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
-import * as authActions from "store/modules/auth";
-import { isEmail, isLength, isAlphanumeric } from "validator";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import RegisterTemplate from 'components/auth/Register/RegisterTemplate';
+import RegisterForm from 'components/auth/Register/RegisterForm';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import * as authActions from 'store/modules/auth';
+import { isEmail, isLength, isAlphanumeric } from 'validator';
+import { withRouter } from 'react-router-dom';
 
 class RegisterContainer extends Component {
   setError = message => {
@@ -16,7 +16,7 @@ class RegisterContainer extends Component {
   validate = {
     username: value => {
       if (!isLength(value, { min: 1, max: 40 })) {
-        this.setError("이름을 1~40자로 입력하세요.");
+        this.setError('이름을 1~40자로 입력하세요.');
         return false;
       }
       return true;
@@ -24,7 +24,7 @@ class RegisterContainer extends Component {
 
     email: value => {
       if (!isEmail(value)) {
-        this.setError("이메일 형식이 아닙니다.");
+        this.setError('이메일 형식이 아닙니다.');
         return false;
       }
 
@@ -33,11 +33,39 @@ class RegisterContainer extends Component {
 
     id: value => {
       if (!isAlphanumeric(value) || !isLength(value, { min: 4, max: 16 })) {
-        this.setError("아이디는 3~16자의 영소문자, 숫자, - _ 가 허용됩니다.");
+        this.setError('아이디는 3~16자의 영소문자, 숫자, - _ 가 허용됩니다.');
         return false;
       }
 
       return true;
+    },
+  };
+
+  checkEmailExists = async email => {
+    const { AuthActions } = this.props;
+    try {
+      await AuthActions.checkEmailExists(email);
+      if (this.props.exists.email) {
+        this.setError('이미 존재하는 이메일입니다.');
+      } else {
+        this.setError(null);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  checkIdExists = async id => {
+    const { AuthActions } = this.props;
+    try {
+      await AuthActions.checkIdExists(id);
+      if (this.props.exists.id) {
+        this.setError('이미 존재하는 이메일입니다.');
+      } else {
+        this.setError(null);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -47,11 +75,7 @@ class RegisterContainer extends Component {
     const { validate } = this;
 
     if (error) return;
-    if (
-      !validate["username"](username) ||
-      !validate["email"](email) ||
-      !validate["id"](id)
-    ) {
+    if (!validate['username'](username) || !validate['email'](email) || !validate['id'](id)) {
       return;
     }
 
@@ -60,22 +84,19 @@ class RegisterContainer extends Component {
         username,
         email,
         id,
-        introduce
+        introduce,
       });
 
       const loggedInfo = this.props.result;
       console.log(loggedInfo);
-      history.push("/");
+      history.push('/');
     } catch (e) {
       if (e.response.status === 409) {
         const { key } = e.reponse.data;
-        const message =
-          key === "email"
-            ? "이미 존재하는 이메일입니다."
-            : "이미 존재하는 아이디입니다.";
+        const message = key === 'email' ? '이미 존재하는 이메일입니다.' : '이미 존재하는 아이디입니다.';
         return this.setError(message);
       }
-      this.setError("알 수 없는 에러가 발생했습니다.");
+      this.setError('알 수 없는 에러가 발생했습니다.');
     }
   };
 
@@ -83,6 +104,13 @@ class RegisterContainer extends Component {
     const { name, value } = e.target;
     const { AuthActions } = this.props;
     AuthActions.changeInfo({ name, value });
+
+    const validation = this.validate[name](value);
+    if (!validation) return;
+    if (name === 'email' || name === 'id') {
+      const check = name === 'email' ? this.checkEmailExists : this.checkIdExists;
+      check(value);
+    }
   };
 
   render() {
@@ -90,11 +118,7 @@ class RegisterContainer extends Component {
     const { hanldeChangeInfo, handleRegister } = this;
     return (
       <RegisterTemplate>
-        <RegisterForm
-          registerForm={registerForm}
-          onChangeInfo={hanldeChangeInfo}
-          onRegister={handleRegister}
-        />
+        <RegisterForm registerForm={registerForm} onChangeInfo={hanldeChangeInfo} onRegister={handleRegister} />
       </RegisterTemplate>
     );
   }
@@ -105,11 +129,12 @@ const enhance = compose(
   connect(
     ({ auth }) => ({
       error: auth.error,
-      registerForm: auth.registerForm
+      registerForm: auth.registerForm,
+      exists: auth.exists,
     }),
     dispatch => ({
-      AuthActions: bindActionCreators(authActions, dispatch)
-    })
-  )
+      AuthActions: bindActionCreators(authActions, dispatch),
+    }),
+  ),
 );
 export default enhance(RegisterContainer);

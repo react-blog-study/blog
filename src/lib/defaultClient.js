@@ -1,13 +1,14 @@
 import axios from "axios";
 
-axios.defaults.withCredentials = true;
-
 const baseUrl = (() => {
   return "/";
 })();
 
 const defaultClient = axios.create({
   baseUrl,
+  // `withCredentials` indicates whether or not cross-site Access-Control requests
+  // should be made using credentials
+  //withCredentials: false, // default
   withCredentials: true
 });
 

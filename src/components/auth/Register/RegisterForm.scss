@@ -58,6 +58,14 @@
       }
     }
 
+    .error {
+      margin-top: 1rem;
+      background: #fff5f5;
+      border: 1px solid red;
+      color: red;
+      padding: 0.5rem;
+    }
+
     .buttonWrapper {
       display: flex;
       justify-content: flex-end;
