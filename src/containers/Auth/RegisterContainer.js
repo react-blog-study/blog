@@ -4,8 +4,10 @@ import RegisterForm from 'components/auth/Register/RegisterForm';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import * as authActions from 'store/modules/auth';
+import * as userActions from 'store/modules/user';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { withRouter } from 'react-router-dom';
+import storage from 'lib/storage';
 
 class RegisterContainer extends Component {
   setError = message => {
@@ -70,7 +72,7 @@ class RegisterContainer extends Component {
   };
 
   handleRegister = async () => {
-    const { registerForm, AuthActions, error, history } = this.props;
+    const { registerForm, AuthActions, UserActions, error, history } = this.props;
     const { username, email, id, introduce } = registerForm;
     const { validate } = this;
 
@@ -88,7 +90,9 @@ class RegisterContainer extends Component {
       });
 
       const loggedInfo = this.props.result;
-      console.log(loggedInfo);
+      storage.set('loggedInfo', loggedInfo);
+      UserActions.setLoggedInfo(loggedInfo);
+      UserActions.setValidated(true);
       history.push('/');
     } catch (e) {
       if (e.response.status === 409) {
@@ -128,12 +132,14 @@ const enhance = compose(
   withRouter,
   connect(
     ({ auth }) => ({
-      error: auth.error,
       registerForm: auth.registerForm,
       exists: auth.exists,
+      error: auth.error,
+      result: auth.result,
     }),
     dispatch => ({
       AuthActions: bindActionCreators(authActions, dispatch),
+      UserActions: bindActionCreators(userActions, dispatch),
     }),
   ),
 );

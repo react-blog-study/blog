@@ -1,17 +1,41 @@
-import React, { Component } from "react";
-import LoginTemplate from "components/auth/Login/LoginTemplate";
-import LoginForm from "components/auth/Login/LoginForm";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as authActions from "store/modules/auth";
-import { withRouter } from "react-router-dom";
-import { compose } from "redux";
+import React, { Component } from 'react';
+import LoginTemplate from 'components/auth/Login/LoginTemplate';
+import LoginForm from 'components/auth/Login/LoginForm';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as authActions from 'store/modules/auth';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import queryString from 'query-string';
 
 class LoginContainer extends Component {
   handleChangeEmail = e => {
     const { name, value } = e.target;
     const { AuthActions } = this.props;
     AuthActions.changeInfo({ name, value });
+  };
+
+  componentWillUnmount() {
+    const { AuthActions } = this.props;
+    AuthActions.initializeForm();
+  }
+
+  componentDidMount() {
+    const { location } = this.props;
+    const query = queryString.parse(location.search);
+
+    if (query.expired !== undefined) {
+      // this.setError('세션에 만료되었습니다. 다시 로그인하세요.');
+    }
+  }
+
+  setError = message => {
+    const { AuthActions } = this.props;
+    AuthActions.setError({
+      message,
+    });
+
+    return false;
   };
 
   handleSendAuthEmail = async () => {
@@ -27,7 +51,7 @@ class LoginContainer extends Component {
       }
 
       /* 회원가입처리*/
-      history.push("/register");
+      history.push('/register');
     } catch (e) {
       console.log(e);
     }
@@ -39,11 +63,7 @@ class LoginContainer extends Component {
 
     return (
       <LoginTemplate>
-        <LoginForm
-          email={email}
-          onChangeEmail={handleChangeEmail}
-          onSendAuthEmail={handleSendAuthEmail}
-        />
+        <LoginForm email={email} onChangeEmail={handleChangeEmail} onSendAuthEmail={handleSendAuthEmail} />
       </LoginTemplate>
     );
   }
@@ -53,12 +73,12 @@ const enhance = compose(
   withRouter,
   connect(
     ({ auth }) => ({
-      email: auth.registerForm.email
+      email: auth.registerForm.email,
     }),
     dispatch => ({
-      AuthActions: bindActionCreators(authActions, dispatch)
-    })
-  )
+      AuthActions: bindActionCreators(authActions, dispatch),
+    }),
+  ),
 );
 
 export default enhance(LoginContainer);

@@ -11,7 +11,8 @@ const CHECK_ID_EXISTS = 'auth/CHECK_USERNAME_EXISTS';
 const REGISTER = 'auth/REGISTER';
 const LOCAL_LOGIN = 'auth/LOCAL_LOGIN';
 const SET_ERROR = 'auth/SET_ERROR';
-const LOGOUT = 'auth/LOGOUT';
+
+const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
 export const changeInfo = createAction(CHANGE_INFO);
 export const sendAuthEamil = createAction(SEND_AUTH_EMAIL, AuthAPI.sendAuthEmail);
@@ -20,7 +21,7 @@ export const checkIdameExists = createAction(CHECK_ID_EXISTS, AuthAPI.checkIdExi
 export const register = createAction(REGISTER, AuthAPI.register);
 export const localLogin = createAction(LOCAL_LOGIN);
 export const setError = createAction(SET_ERROR);
-export const logout = createAction(LOGOUT);
+export const initializeForm = createAction(INITIALIZE_FORM);
 
 const initialState = {
   isUser: false,
@@ -51,6 +52,11 @@ export default handleActions(
     [SET_ERROR]: (state, action) =>
       produce(state, draft => {
         draft.error = action.payload;
+      }),
+
+    [INITIALIZE_FORM]: (state, action) =>
+      produce(state, draft => {
+        draft.registerForm['email'] = '';
       }),
 
     ...pender({
