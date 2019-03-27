@@ -7,12 +7,10 @@ const CHANGE_INFO = 'auth/CHANGE_INFO';
 const SEND_AUTH_EMAIL = 'auth/SEND_AUTH_EMAIL';
 const CHECK_EMAIL_EXISTS = 'auth/CHECK_EMAIL_EXISTS';
 const CHECK_ID_EXISTS = 'auth/CHECK_USERNAME_EXISTS';
-
 const REGISTER = 'auth/REGISTER';
 const LOCAL_LOGIN = 'auth/LOCAL_LOGIN';
 const SET_ERROR = 'auth/SET_ERROR';
-
-const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const GET_CODE = 'auth/GET_CODE';
 
 export const changeInfo = createAction(CHANGE_INFO);
 export const sendAuthEamil = createAction(SEND_AUTH_EMAIL, AuthAPI.sendAuthEmail);
@@ -21,7 +19,7 @@ export const checkIdameExists = createAction(CHECK_ID_EXISTS, AuthAPI.checkIdExi
 export const register = createAction(REGISTER, AuthAPI.register);
 export const localLogin = createAction(LOCAL_LOGIN);
 export const setError = createAction(SET_ERROR);
-export const initializeForm = createAction(INITIALIZE_FORM);
+export const getCode = createAction(GET_CODE, AuthAPI.getCode);
 
 const initialState = {
   isUser: false,
@@ -29,7 +27,7 @@ const initialState = {
   registerForm: {
     username: '',
     email: '',
-    id: '',
+    userId: '',
     introduce: '',
   },
   exists: {
@@ -38,6 +36,8 @@ const initialState = {
   },
   erorr: '',
   result: {},
+  isSocial: false,
+  registerToken: '',
 };
 
 export default handleActions(
@@ -53,12 +53,6 @@ export default handleActions(
       produce(state, draft => {
         draft.error = action.payload;
       }),
-
-    [INITIALIZE_FORM]: (state, action) =>
-      produce(state, draft => {
-        draft.registerForm['email'] = '';
-      }),
-
     ...pender({
       type: SEND_AUTH_EMAIL,
       onSuccess: (state, action) =>
@@ -97,7 +91,15 @@ export default handleActions(
         }),
     }),
 
-    ...pender({}),
+    ...pender({
+      type: GET_CODE,
+      onSuccess: (state, action) =>
+        produce(state, draft => {
+          const { email, registerToken } = action.payload.data;
+          draft.registerForm.email = email;
+          draft.registerToken = registerToken;
+        }),
+    }),
   },
   initialState,
 );

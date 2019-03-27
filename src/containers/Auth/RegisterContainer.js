@@ -8,8 +8,29 @@ import * as userActions from 'store/modules/user';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { withRouter } from 'react-router-dom';
 import storage from 'lib/storage';
-
+import queryString from 'query-string';
 class RegisterContainer extends Component {
+  initialize = async () => {
+    const { isSocial, history, location, AuthActions } = this.props;
+    const { search } = location;
+    const { code } = queryString.parse(search);
+
+    if (!code && !isSocial) {
+      history.push('/');
+      return;
+    }
+
+    try {
+      if (!isSocial) {
+        await AuthActions.getCode(code);
+      }
+    } catch (e) {}
+  };
+
+  componentDidMount() {
+    this.initialize();
+  }
+
   setError = message => {
     const { AuthActions } = this.props;
     AuthActions.setError({ message });
@@ -57,11 +78,11 @@ class RegisterContainer extends Component {
     }
   };
 
-  checkIdExists = async id => {
+  checkIdExists = async userId => {
     const { AuthActions } = this.props;
     try {
-      await AuthActions.checkIdExists(id);
-      if (this.props.exists.id) {
+      await AuthActions.checkIdExists(userId);
+      if (this.props.exists.userId) {
         this.setError('이미 존재하는 이메일입니다.');
       } else {
         this.setError(null);
@@ -72,12 +93,12 @@ class RegisterContainer extends Component {
   };
 
   handleRegister = async () => {
-    const { registerForm, AuthActions, UserActions, error, history } = this.props;
-    const { username, email, id, introduce } = registerForm;
+    const { registerForm, AuthActions, UserActions, error, registerToken, location, history } = this.props;
+    const { username, email, userId, introduce } = registerForm;
     const { validate } = this;
 
     if (error) return;
-    if (!validate['username'](username) || !validate['email'](email) || !validate['id'](id)) {
+    if (!validate['username'](username) || !validate['email'](email) || !validate['userId'](userId)) {
       return;
     }
 
@@ -85,7 +106,7 @@ class RegisterContainer extends Component {
       await AuthActions.localRegister({
         username,
         email,
-        id,
+        userId,
         introduce,
       });
 
@@ -111,7 +132,7 @@ class RegisterContainer extends Component {
 
     const validation = this.validate[name](value);
     if (!validation) return;
-    if (name === 'email' || name === 'id') {
+    if (name === 'email' || name === 'userId') {
       const check = name === 'email' ? this.checkEmailExists : this.checkIdExists;
       check(value);
     }
@@ -136,6 +157,8 @@ const enhance = compose(
       exists: auth.exists,
       error: auth.error,
       result: auth.result,
+      isSocial: auth.isSocial,
+      registerToken: auth.registerToken,
     }),
     dispatch => ({
       AuthActions: bindActionCreators(authActions, dispatch),

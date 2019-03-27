@@ -13,3 +13,5 @@ export const checkIdExists = id => axios.get(`/api/auth/exists/id/${id}`);
 
 export const checkStatus = () => axios.get('/api/auth/check');
 export const logout = () => axios.post('/api/auth/logout');
+
+export const getCode = code => axios.get(`/api/auth/code/${code}`);
