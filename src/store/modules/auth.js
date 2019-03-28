@@ -5,21 +5,17 @@ import { pender } from 'redux-pender';
 
 const CHANGE_INFO = 'auth/CHANGE_INFO';
 const SEND_AUTH_EMAIL = 'auth/SEND_AUTH_EMAIL';
-const CHECK_EMAIL_EXISTS = 'auth/CHECK_EMAIL_EXISTS';
-const CHECK_ID_EXISTS = 'auth/CHECK_USERNAME_EXISTS';
-const REGISTER = 'auth/REGISTER';
 const LOCAL_LOGIN = 'auth/LOCAL_LOGIN';
 const SET_ERROR = 'auth/SET_ERROR';
 const GET_CODE = 'auth/GET_CODE';
+const LOCAL_REGISTER = 'auth/LOCAL_REGISTER';
 
 export const changeInfo = createAction(CHANGE_INFO);
 export const sendAuthEamil = createAction(SEND_AUTH_EMAIL, AuthAPI.sendAuthEmail);
-export const checkEmailExists = createAction(CHECK_EMAIL_EXISTS, AuthAPI.checkEmailExists); // email
-export const checkIdameExists = createAction(CHECK_ID_EXISTS, AuthAPI.checkIdExists); // username
-export const register = createAction(REGISTER, AuthAPI.register);
 export const localLogin = createAction(LOCAL_LOGIN);
 export const setError = createAction(SET_ERROR);
 export const getCode = createAction(GET_CODE, AuthAPI.getCode);
+export const localRegister = createAction(LOCAL_REGISTER, AuthAPI.localRegister);
 
 const initialState = {
   isUser: false,
@@ -28,16 +24,17 @@ const initialState = {
     username: '',
     email: '',
     userId: '',
-    introduce: '',
+    short_intro: '',
   },
   exists: {
     email: '',
-    id: '',
+    userId: '',
   },
   erorr: '',
-  result: {},
+  authResult: {},
   isSocial: false,
   registerToken: '',
+  verifySocialResult: null,
 };
 
 export default handleActions(
@@ -64,26 +61,6 @@ export default handleActions(
     }),
 
     ...pender({
-      type: CHECK_EMAIL_EXISTS,
-      onSuccess: (state, action) =>
-        produce(state, draft => {
-          draft.exists.eamil = action.payload.data;
-        }),
-    }),
-    ...pender({
-      type: CHECK_ID_EXISTS,
-      onSuccess: (state, action) =>
-        produce(state, draft => {
-          draft.exists.id = action.payload.data;
-        }),
-    }),
-
-    ...pender({
-      type: REGISTER,
-      onSuccess: (state, action) => produce(state, draft => {}),
-    }),
-
-    ...pender({
       tyep: LOCAL_LOGIN,
       onSuccess: (state, action) =>
         produce(state, draft => {
@@ -98,6 +75,22 @@ export default handleActions(
           const { email, registerToken } = action.payload.data;
           draft.registerForm.email = email;
           draft.registerToken = registerToken;
+        }),
+    }),
+
+    ...pender({
+      type: LOCAL_REGISTER,
+      onSuccess: (state, { payload: { data } }) =>
+        produce(state, draft => {
+          const { user, token } = data;
+          draft.authResult = {
+            user,
+            token,
+          };
+        }),
+      onFailure: (state, { payload: { response } }) =>
+        produce(state, draft => {
+          draft.erorr = response.data;
         }),
     }),
   },
