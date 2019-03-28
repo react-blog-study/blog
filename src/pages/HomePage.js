@@ -7,13 +7,13 @@ import MainContentTemplate from "components/Base/Main/MainContentTemplate";
 /*
  *  트렌딩, 최신포스트, 태그목록
  */
-const HomePage = () => {
+const HomePage = ({ match }) => {
   return (
     <PageTemplate>
       <LeftMenuContainer />
       <MainTemplate>
         <MainHeaderContainer />
-        <MainContentTemplate />
+        <MainContentTemplate mode={ match.params.mode }/>
       </MainTemplate>
     </PageTemplate>
   );
