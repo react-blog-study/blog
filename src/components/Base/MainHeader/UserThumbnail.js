@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from 'react';
+import './UserThumbnail.scss';
 
-class UserThumbnail extends Component {
-  render() {
-    return <div />;
-  }
-}
+const UserThumbnail = ({ image }) => {
+  return <div className="UserThumbnail" image={image} />;
+};
 
 export default UserThumbnail;

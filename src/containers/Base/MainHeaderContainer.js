@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as userActions from 'store/modules/user';
 import { bindActionCreators } from 'redux';
 import storage from 'lib/storage';
+import UserThumbnail from 'components/Base/MainHeader/UserThumbnail';
 
 class MainHeaderContainer extends Component {
   hanldeLogout = async () => {
@@ -24,7 +25,7 @@ class MainHeaderContainer extends Component {
       <MainHeader>
         {user.logged ? (
           <div>
-            {user.loggedInfo.username} <div onClick={this.handleLogout}>(로그아웃)</div>
+            <UserThumbnail image={user.loggedInfo.thumbnail} /> <div onClick={this.handleLogout}>(로그아웃)</div>
           </div>
         ) : (
           <LoginButton />
