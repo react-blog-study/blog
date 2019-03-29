@@ -1,0 +1,11 @@
+.user-menu-item {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #495057;
+  display: block;
+  &:hover {
+    color: #7950f2;
+  }
+}

@@ -15,11 +15,6 @@ class LoginContainer extends Component {
     AuthActions.changeInfo({ name, value });
   };
 
-  componentWillUnmount() {
-    const { AuthActions } = this.props;
-    AuthActions.initializeForm();
-  }
-
   componentDidMount() {
     const { location } = this.props;
     const query = queryString.parse(location.search);

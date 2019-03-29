@@ -38,6 +38,10 @@
         border-bottom: 1px solid #ced4da;
         font-size: 1.25rem;
 
+        &.disabled {
+          cursor: not-allowed;
+        }
+
         &:focus {
           border-bottom: 1px solid #7048e8;
         }

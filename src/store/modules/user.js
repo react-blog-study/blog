@@ -49,6 +49,11 @@ export default handleActions(
 
       onFailure: (state, action) => initialState,
     }),
+
+    ...pender({
+      type: LOGOUT,
+      onSuccess: state => {},
+    }),
   },
   initialState,
 );
