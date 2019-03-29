@@ -1,8 +1,12 @@
 import React from 'react';
 import './UserThumbnail.scss';
-
-const UserThumbnail = ({ image }) => {
-  return <div className="UserThumbnail" image={image} />;
+import defaultThumbnail from 'static/images/default_thumbnail.png';
+const UserThumbnail = ({ onShowMenu }) => {
+  return (
+    <div className="UserThumbnail">
+      <img src={defaultThumbnail} onClick={onShowMenu} alt="" />
+    </div>
+  );
 };
 
 export default UserThumbnail;
