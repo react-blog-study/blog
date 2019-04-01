@@ -84,7 +84,6 @@ class RegisterContainer extends Component {
       }
 
       const { authResult } = this.props;
-      console.log(authResult);
 
       if (!authResult) return;
       const { user } = authResult;

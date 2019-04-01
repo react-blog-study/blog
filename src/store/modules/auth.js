@@ -12,7 +12,7 @@ const LOCAL_REGISTER = 'auth/LOCAL_REGISTER';
 
 export const changeInfo = createAction(CHANGE_INFO);
 export const sendAuthEamil = createAction(SEND_AUTH_EMAIL, AuthAPI.sendAuthEmail);
-export const localLogin = createAction(LOCAL_LOGIN);
+export const localLogin = createAction(LOCAL_LOGIN, AuthAPI.localLogin);
 export const setError = createAction(SET_ERROR);
 export const getCode = createAction(GET_CODE, AuthAPI.getCode);
 export const localRegister = createAction(LOCAL_REGISTER, AuthAPI.localRegister);
@@ -52,12 +52,14 @@ export default handleActions(
       }),
     ...pender({
       type: SEND_AUTH_EMAIL,
+      onPending: () => {},
       onSuccess: (state, action) =>
         produce(state, draft => {
           const { isUser } = action.payload.data;
           draft.isUser = isUser;
           draft.sentEmail = true;
         }),
+      onFailure: () => {},
     }),
 
     ...pender({
@@ -91,6 +93,25 @@ export default handleActions(
       onFailure: (state, { payload: { response } }) =>
         produce(state, draft => {
           draft.erorr = response.data;
+        }),
+    }),
+
+    ...pender({
+      type: LOCAL_LOGIN,
+      onSuccess: (state, { payload: { data } }) =>
+        produce(state, draft => {
+          const { user, token } = data;
+
+          console.log(user);
+          alert('1');
+          draft.authResult = {
+            user,
+            token,
+          };
+        }),
+      onFailure: (state, { payload: { response } }) =>
+        produce(state, draft => {
+          draft.error = response.data;
         }),
     }),
   },

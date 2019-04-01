@@ -1,0 +1,16 @@
+.ViewerHead {
+  display: flex;
+  align-items: center;
+  height: 7rem;
+  padding: 0 2rem;
+
+  .logo-area {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-family: Inconsolata;
+    color: #212529;
+  }
+  .right-corner {
+    margin-left: auto;
+  }
+}

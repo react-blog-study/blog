@@ -10,11 +10,6 @@ import UserThumbnail from 'components/Base/MainHeader/UserThumbnail';
 import UserMenu from 'components/Base/MainHeader/UserMenu';
 
 class MainHeaderContainer extends Component {
-  onClickOutside = e => {
-    const { BaseActions } = this.props;
-    BaseActions.hideUserMenu();
-  };
-
   handleShowUserMenu = () => {
     const { BaseActions } = this.props;
     BaseActions.showUserMenu();
@@ -38,13 +33,13 @@ class MainHeaderContainer extends Component {
   };
   render() {
     const { user, showUserMenu } = this.props;
-    const { handleLogout, handleShowUserMenu, handleHideUserMenu, onClickOutside } = this;
+    const { handleLogout, handleShowUserMenu, handleHideUserMenu } = this;
     return (
       <MainHeader>
         {user.logged ? (
           <div>
             <UserThumbnail thumbnail={user.loggedInfo.thumbnail} onShowMenu={handleShowUserMenu} />
-            {showUserMenu && <UserMenu eventTypes="click" onLogout={handleLogout} onHideMenu={handleHideUserMenu} onClickOutside={onClickOutside} />}
+            {showUserMenu && <UserMenu eventTypes="click" loggedInfo={user.loggedInfo} onLogout={handleLogout} onHideMenu={handleHideUserMenu} />}
           </div>
         ) : (
           <LoginButton />

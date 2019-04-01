@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, Login, Register, Write, Policy, User, Saves, Settings, NotFound } from 'pages';
+import { Home, Login, Register, EmailLogin, Write, Policy, User, Saves, Settings, NotFound } from 'pages';
 import { hot } from 'react-hot-loader';
 import Core from 'containers/Base/Core';
 import storage from 'lib/storage';
@@ -15,11 +15,13 @@ class App extends Component {
 
     const { UserActions } = this.props;
     UserActions.setLoggedInfo(loggedInfo);
+
+    console.log(loggedInfo);
     try {
       await UserActions.checkStatus();
     } catch (e) {
       storage.remove('loggedInfo');
-      window.location.href = 'auth/login?expired';
+      window.location.href = 'auth/login';
     }
   };
 
@@ -35,12 +37,13 @@ class App extends Component {
           <Route path="/:mode(trending|recent|tags)" component={Home} />
           <Route path="/write" component={Write} />
 
-          <Route exact path="/@:username/" component={User} />
-          <Route exact path="/@:username/tags/:tag" component={User} />
-          <Route exact path="/@:username/:tab(history|about|series)" component={User} />
+          <Route exact path="/@:userId/" component={User} />
+          <Route exact path="/@:userId/tags/:tag" component={User} />
+          <Route exact path="/@:userId/:tab(history|about|series)" component={User} />
 
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/email-login" component={EmailLogin} />
 
           <Route path="/policy/:mode(policy|terms)" component={Policy} />
           <Route path="/saves" component={Saves} />

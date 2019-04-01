@@ -40,9 +40,9 @@ export default handleActions(
 
     ...pender({
       type: CHECK_STATUS,
-      onSuccess: (state, action) => {
+      onSuccess: (state, { payload: { data } }) => {
         return produce(state, draft => {
-          draft.loggedInfo = action.payload;
+          draft.loggedInfo = data.user;
           draft.validated = true;
         });
       },
