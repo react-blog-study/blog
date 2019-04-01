@@ -23,18 +23,15 @@ class MainContentTemplate extends Component {
     const mode = this.props.mode;
     console.log(mode);
     
-    switch (mode) {
-      case 'recent':
-        return <Recent />
-      case 'tags':
+      if(mode === 'tags') {
         return <Tag />
-      default:
+      } else {
         return (
-          <Grid container columns={4}>
-            { GridRows }
-          </Grid>
+        <Grid container columns={4}>
+          { GridRows }
+        </Grid>
         )
-    }
+      }
   }
 }
 

@@ -13,7 +13,7 @@ const HomePage = ({ match }) => {
       <LeftMenuContainer />
       <MainTemplate>
         <MainHeaderContainer />
-        <MainContentTemplate mode={ match.params.mode }/>
+          <MainContentTemplate mode={ match.params.mode } />
       </MainTemplate>
     </PageTemplate>
   );
