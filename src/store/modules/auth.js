@@ -101,9 +101,6 @@ export default handleActions(
       onSuccess: (state, { payload: { data } }) =>
         produce(state, draft => {
           const { user, token } = data;
-
-          console.log(user);
-          alert('1');
           draft.authResult = {
             user,
             token,

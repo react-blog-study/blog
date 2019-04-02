@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import "./LeftMenuTemplate.scss";
-import LeftMenuList from "./LeftMenuList";
+import React, { Component } from 'react';
+import './LeftMenuTemplate.scss';
+import LeftMenuList from './LeftMenuList';
 
 class LeftMenuTemplate extends Component {
   render() {
+    const { url } = this.props;
     return (
       <div className="LeftMenuTemplate">
         <div className="Logo">velog</div>
@@ -12,7 +13,7 @@ class LeftMenuTemplate extends Component {
         </div>
 
         <div className="">
-          <LeftMenuList />
+          <LeftMenuList url={url} />
         </div>
 
         <div className="place" />

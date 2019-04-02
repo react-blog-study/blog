@@ -15,7 +15,7 @@ const UserMenu = ({ loggedInfo, onLogout, onHideMenu }) => {
             <UserMenuItem to="/write">새 글 작성</UserMenuItem>
             <UserMenuItem to="/saves">임시 글</UserMenuItem>
             <div className="separated" />
-            <UserMenuItem to="settings">설정</UserMenuItem>
+            <UserMenuItem to="/settings">설정</UserMenuItem>
             <UserMenuItem onClick={onLogout}>로그아웃</UserMenuItem>
           </div>
         </div>
