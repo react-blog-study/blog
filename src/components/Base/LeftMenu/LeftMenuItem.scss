@@ -1,0 +1,17 @@
+.LeftMenuItem {
+  font-size: 1.25rem;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: black;
+    background: #f1f3f5;
+  }
+
+  .text {
+    margin-left: 1rem;
+  }
+}
