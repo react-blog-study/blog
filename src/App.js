@@ -40,6 +40,7 @@ class App extends Component {
           <Route exact path="/@:userId/" component={User} />
           <Route exact path="/@:userId/tags/:tag" component={User} />
           <Route exact path="/@:userId/:tab(history|about|series)" component={User} />
+          <Route exact path="/@:userId/:title" component={User} />
 
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

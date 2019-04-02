@@ -1,8 +1,8 @@
 .UserInfoHeader {
   display: flex;
   img {
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 12rem;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -11,10 +11,10 @@
     flex: 1 1;
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     .top {
       .userId {
-        margin-top: 2rem;
+        margin-top: 3rem;
         font-weight: 500;
         color: #7950f2;
         padding-bottom: 0.5rem;
