@@ -15,11 +15,7 @@ export const checkStatus = createAction(CHECK_STATUS, AuthAPI.checkStatus);
 
 const initialState = {
   // 현재 유저의 정보
-  loggedInfo: {
-    thumbnail: null,
-    username: null,
-  },
-
+  loggedInfo: null,
   logged: false, // 현재 로그인중인지 알려준다.
   validated: false, //이 값은 현재 로그인중인지 아닌지 한번 서버측에 검증했음을 의미
 };

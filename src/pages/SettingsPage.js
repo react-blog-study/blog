@@ -1,15 +1,15 @@
 import React from 'react';
-import UserTemplate from 'components/user/UserTemplate/UserTemplate';
 import UserHeaderContainer from 'containers/User/UserHeaderContainer';
-import SettingContainer from 'containers/User/SettingContainer';
+import SettingTemplate from 'components/user/Setting/SettingTemplate/SettingTemplate';
+import SettingSections from 'containers/User/Setting/SettingSections';
 /**
  * 개인정보 설정 페이지
  */
 const SettingsPage = () => {
   return (
-    <UserTemplate header={<UserHeaderContainer />}>
-      <SettingContainer />
-    </UserTemplate>
+    <SettingTemplate header={<UserHeaderContainer />}>
+      <SettingSections />
+    </SettingTemplate>
   );
 };
 

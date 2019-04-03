@@ -1,0 +1,42 @@
+.SettingProfileEmailLink {
+  font-size: 1.25rem;
+  .label {
+    font-weight: 600;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    line-height: 2.5rem;
+
+    .template-url {
+      padding: 0 1rem;
+      background: #f8f9fa;
+      color: #868e96;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    input {
+      margin-left: 1rem;
+      flex: 1 1;
+      border: none;
+      border-right: 1px solid #ced4da;
+      border-bottom-right-radius: 8px;
+      border-top-right-radius: 8px;
+      font-weight: 600;
+      line-height: inherit;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  & + & {
+    margin-top: 1.75rem;
+  }
+}

@@ -1,15 +1,17 @@
 import React from 'react';
-import UserTemplate from 'components/user/UserTemplate/UserTemplate';
 import UserHeaderContainer from 'containers/User/UserHeaderContainer';
 import SavePostContainer from 'containers/User/SavePostContainer';
+import SavePostTemplate from 'components/user/SavePost/SavePostTemplate/SavePostTemplate';
 /**
  * 임시 글 목록
  */
 const SavesPostPage = () => {
   return (
-    <UserTemplate header={<UserHeaderContainer />}>
+    <SavePostTemplate header={<UserHeaderContainer />}>
       <SavePostContainer />
-    </UserTemplate>
+      <SavePostContainer />
+      <SavePostContainer />
+    </SavePostTemplate>
   );
 };
 

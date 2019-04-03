@@ -1,0 +1,10 @@
+.SettingSection {
+  h4 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  & + & {
+    margin-top: 4rem;
+  }
+}

@@ -1,0 +1,16 @@
+.SettingEtc {
+  button {
+    padding: 0.5rem;
+    background: white;
+    color: #e03131;
+    border: 1px solid #e03131;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.125s ease-in;
+
+    &:hover {
+      background: #e44e4e;
+      color: white;
+    }
+  }
+}

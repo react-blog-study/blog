@@ -1,0 +1,22 @@
+.SettingTemplate {
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 768px;
+    margin: 6rem auto;
+    padding: 0 1rem;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      font-size: 2.75rem;
+      font-weight: 500;
+      padding-bottom: 1rem;
+
+      svg {
+        font-size: 2.5rem;
+        margin-right: 1.25rem;
+      }
+    }
+  }
+}

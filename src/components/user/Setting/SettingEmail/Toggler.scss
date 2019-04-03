@@ -1,0 +1,43 @@
+.Toggler {
+  display: flex;
+  align-items: center;
+
+  .toggle-box {
+    display: flex;
+    align-items: center;
+    background: #dee2e6;
+    width: 56px;
+    height: 32px;
+    border-radius: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.125s ease-in;
+
+    .circle {
+      width: 24px;
+      height: 24px;
+      top: 4px;
+      left: 4px;
+      background: white;
+      border-radius: 100%;
+      position: absolute;
+      transition: transform 0.125s ease-in;
+    }
+  }
+
+  .text {
+    margin-left: 0.5rem;
+    font-weight: 600;
+  }
+
+  .active {
+    background: #9576f5;
+    .circle {
+      transform: translate(24px);
+    }
+  }
+
+  & + & {
+    margin-top: 0.5rem;
+  }
+}

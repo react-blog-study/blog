@@ -1,0 +1,61 @@
+.SettingProfileInfo {
+  display: flex;
+
+  .thumbnail-area {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1.5rem;
+    img {
+      width: 14rem;
+      height: 14rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      border-radius: 4px;
+      background: #9576f5;
+      color: white;
+      padding: 1rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background: #a68bf7;
+      }
+    }
+  }
+
+  .user-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin: 1rem 0;
+      font-size: 1.25rem;
+    }
+
+    .right {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        padding: 0.5rem 0.875rem;
+        line-height: 0.875rem;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.03);
+        }
+      }
+    }
+  }
+}

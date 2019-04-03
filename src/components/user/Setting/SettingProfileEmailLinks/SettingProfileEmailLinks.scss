@@ -1,0 +1,33 @@
+.SettingProfileEmailLinks {
+  h5 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+
+  .inputs {
+  }
+
+  .button-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    button {
+      padding: 1rem;
+      color: white;
+      background: #9576f5;
+      font-size: 1.5rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background: #a68bf7;
+      }
+    }
+  }
+}

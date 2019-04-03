@@ -1,0 +1,44 @@
+.SettingEamil {
+  .email {
+    display: flex;
+    font-size: 1.2rem;
+    .current-email {
+    }
+    .email-action {
+      color: #868e96;
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  section {
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggles {
+    }
+
+    button {
+      margin-top: 1rem;
+      border: 1px solid #495057;
+      border-radius: 4px;
+      padding: 0.5rem;
+      background: white;
+      color: #495057;
+      font-weight: 600;
+
+      &:hover {
+        background: #495057;
+        color: white;
+      }
+    }
+  }
+}
