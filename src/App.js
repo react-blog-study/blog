@@ -16,12 +16,11 @@ class App extends Component {
     const { UserActions } = this.props;
     UserActions.setLoggedInfo(loggedInfo);
 
-    console.log(loggedInfo);
     try {
       await UserActions.checkStatus();
     } catch (e) {
       storage.remove('loggedInfo');
-      window.location.href = 'auth/login';
+      window.location.href = '/login';
     }
   };
 

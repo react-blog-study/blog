@@ -1,5 +1,54 @@
 .SettingProfileInfo {
   display: flex;
+  .user-info-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    input {
+      outline: none;
+      border-radius: 4px;
+      border: 1px solid #ced4da;
+      padding: 1rem;
+    }
+    input + input {
+      margin-top: 1rem;
+    }
+
+    .username {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .right {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 0.5rem 0.875rem;
+        color: white;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .cancel-button {
+        background: #495057;
+        &:hover {
+          background: #9c9d9e;
+        }
+      }
+
+      .confirm-button {
+        margin-left: 0.5rem;
+        background: #9576f5;
+        &:hover {
+          background: #a68bf7;
+        }
+      }
+    }
+  }
 
   .thumbnail-area {
     display: flex;

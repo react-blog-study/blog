@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import Nano from "nanobar";
-import "./Nanobar.scss";
+import React, { Component } from 'react';
+import Nano from 'nanobar';
+import './Nanobar.scss';
 
 class Nanobar extends Component {
   nanobar = null;
   componentDidMount() {
     this.nanobar = new Nano({
-      className: "nanobar",
-      id: "nanobar"
+      className: 'nanobar',
+      id: 'nanobar',
     });
-    window.nanobar = this.nanovar;
+    window.nanobar = this.nanobar;
   }
   remove = () => {
     window.nanobar = null;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as settingsActions from 'store/modules/settings';
 import SettingProfileInfo from 'components/user/Setting/SettingProfileInfo/SettingProfileInfo';
+
 class SettingContainer extends Component {
   initialize = async () => {
     const { user, SettingsActions } = this.props;
@@ -17,9 +18,20 @@ class SettingContainer extends Component {
     this.initialize();
   }
 
+  componentDidUpdate(prevProps) {
+    if (!prevProps.user && this.props.user) {
+      this.initialize();
+    }
+  }
+
+  onUpdateProfile = ({ username, short_intro }) => {
+    return this.props.SettingsActions.updateProfile(username, short_intro);
+  };
+
   render() {
     const { profile } = this.props;
-    return <SettingProfileInfo profile={profile} />;
+    if (!profile) return null;
+    return <SettingProfileInfo profile={profile} onUpdateProfile={this.onUpdateProfile} />;
   }
 }
 

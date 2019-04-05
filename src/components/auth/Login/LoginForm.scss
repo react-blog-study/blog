@@ -17,14 +17,33 @@
     border: 1px solid #e9ecef;
     width: 600px;
 
+    .sent-email {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #b2f2bb;
+      color: #2b8a3e;
+      svg {
+        font-size: 1.5rem;
+      }
+
+      .text {
+        margin-left: 1rem;
+      }
+    }
     .input-with-button {
       display: flex;
       justify-content: center;
+
+      input:focus {
+        outline: none;
+      }
       .email {
         flex: 1 1;
         outline: none;
-        padding-left: 1rem;
+        padding: 1rem;
         font-size: 1.2rem;
+        font-weight: 600;
         border: 1px solid #dee2e6;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
@@ -50,6 +69,13 @@
 
         &:active {
           background: #7f57f7;
+        }
+      }
+      transition: opacity 0.3s ease-in;
+      &.sending {
+        opacity: 0.75;
+        .startButton {
+          cursor: default;
         }
       }
     }

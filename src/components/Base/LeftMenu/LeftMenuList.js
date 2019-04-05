@@ -9,7 +9,6 @@ import './LeftMenuList.scss';
 class LeftMenuList extends Component {
   render() {
     const { url } = this.props;
-    console.log(url);
 
     return (
       <div className="LeftMenuList">

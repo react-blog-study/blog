@@ -10,5 +10,5 @@ export default combineReducers({
   auth,
   user,
   settings,
-  penderReducer,
+  pender: penderReducer,
 });

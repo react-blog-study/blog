@@ -1,4 +1,4 @@
-import defaultClient from "./defaultClient";
+import defaultClient from './defaultClient';
 
 const requests = [];
 let progress = 0;
@@ -6,8 +6,9 @@ let timerId = null;
 
 function setProgress(value) {
   progress = value;
-  if (typeof window !== "undefined" && window.nanober) {
-    window.nanober.go(progress);
+
+  if (typeof window !== 'undefined' && window.nanobar) {
+    window.nanobar.go(value);
   }
 }
 
@@ -24,6 +25,7 @@ export function setup() {
   defaultClient.interceptors.request.use(req => {
     if (requests.length === 0) {
       setProgress(25);
+      timer();
     }
 
     requests.push(req);

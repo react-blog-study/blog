@@ -7,6 +7,7 @@ import * as authActions from 'store/modules/auth';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import queryString from 'query-string';
+import { pender } from 'redux-pender/lib/utils';
 
 class LoginContainer extends Component {
   handleChangeEmail = e => {
@@ -34,31 +35,24 @@ class LoginContainer extends Component {
   };
 
   handleSendAuthEmail = async () => {
-    const { email, AuthActions, history, location } = this.props;
-    console.log(location);
-
+    const { email, AuthActions } = this.props;
     try {
       await AuthActions.sendAuthEamil(email);
-      const { isUser } = this.props;
-
-      if (isUser) {
-        /* 로그인 처리 */
-      }
 
       /* 회원가입처리*/
-      history.push('/register');
+      //history.push('/register');
     } catch (e) {
       console.log(e);
     }
   };
 
   render() {
-    const { email } = this.props;
+    const { email, sentEmail, sending, isUser } = this.props;
     const { handleChangeEmail, handleSendAuthEmail } = this;
 
     return (
       <LoginTemplate>
-        <LoginForm email={email} onChangeEmail={handleChangeEmail} onSendAuthEmail={handleSendAuthEmail} />
+        <LoginForm email={email} sentEmail={sentEmail} sending={sending} isUser={isUser} onChangeEmail={handleChangeEmail} onSendAuthEmail={handleSendAuthEmail} />
       </LoginTemplate>
     );
   }
@@ -67,8 +61,11 @@ class LoginContainer extends Component {
 const enhance = compose(
   withRouter,
   connect(
-    ({ auth }) => ({
+    ({ auth, pender }) => ({
       email: auth.registerForm.email,
+      sentEmail: auth.sentEmail,
+      sending: pender.pending['auth/SEND_AUTH_EMAIL'],
+      isUser: auth.isUser,
     }),
     dispatch => ({
       AuthActions: bindActionCreators(authActions, dispatch),

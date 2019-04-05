@@ -52,14 +52,12 @@ export default handleActions(
       }),
     ...pender({
       type: SEND_AUTH_EMAIL,
-      onPending: () => {},
       onSuccess: (state, action) =>
         produce(state, draft => {
           const { isUser } = action.payload.data;
           draft.isUser = isUser;
           draft.sentEmail = true;
         }),
-      onFailure: () => {},
     }),
 
     ...pender({
