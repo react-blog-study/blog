@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserAbout.scss';
 
-const UserAbout = ({ longIntro, self }) => {
+const UserAbout = ({ longIntro, self, onEditClick }) => {
   return (
     <div className="UserAbout">
       {longIntro ? (
@@ -17,7 +17,7 @@ const UserAbout = ({ longIntro, self }) => {
           <div className="text">소개가 작성되지 않았습니다.</div>
           {self && (
             <div className="btn-wapper">
-              <button>작성하기</button>
+              <button onClick={onEditClick}>작성하기</button>
             </div>
           )}
         </div>

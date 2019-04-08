@@ -1,11 +1,9 @@
 import React from 'react';
 import './Tabs.scss';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-const Tab = ({ match, children }) => {
-  const { userId, tab } = match.params;
-
+const Tab = ({ userId, tab, children }) => {
   return (
     <div className="Tabs">
       <Link className={cx({ active: !tab })} to={`/@${userId}`}>
@@ -24,4 +22,4 @@ const Tab = ({ match, children }) => {
   );
 };
 
-export default withRouter(Tab);
+export default Tab;

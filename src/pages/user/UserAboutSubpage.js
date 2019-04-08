@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import UserAboutContainer from 'containers/User/UserAboutContainer';
 class UserAboutSubpage extends Component {
   render() {
-    return <UserAboutContainer userId={this.props.match.userId}>UserAboutSubpage</UserAboutContainer>;
+    const { userId } = this.props.match.params;
+    return <UserAboutContainer userId={userId}>UserAboutSubpage</UserAboutContainer>;
   }
 }
 
