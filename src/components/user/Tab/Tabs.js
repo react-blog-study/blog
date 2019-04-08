@@ -1,22 +1,23 @@
 import React from 'react';
 import './Tabs.scss';
 import { Link, withRouter } from 'react-router-dom';
+import cx from 'classnames';
 
-const Tab = ({ match }) => {
+const Tab = ({ match, children }) => {
   const { userId, tab } = match.params;
 
   return (
     <div className="Tabs">
-      <Link className={!tab && 'active'} to={'/@' + userId}>
+      <Link className={cx({ active: !tab })} to={`/@${userId}`}>
         글
       </Link>
-      <Link className={tab === 'series' && 'active'} to={'/@' + userId + '/series'}>
+      <Link className={cx({ active: tab === 'series' })} to={`/@${userId}/series`}>
         시리즈
       </Link>
-      <Link className={tab === 'history' && 'active'} to={'/@' + userId + '/history'}>
+      <Link className={cx({ active: tab === 'history' })} to={`/@${userId}/history`}>
         활동
       </Link>
-      <Link className={tab === 'about' && 'active'} to={'/@' + userId + '/about'}>
+      <Link className={cx({ active: tab === 'about' })} to={`/@${userId}/about`}>
         소개
       </Link>
     </div>

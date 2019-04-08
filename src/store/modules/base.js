@@ -13,13 +13,13 @@ const initalState = {
 
 export default handleActions(
   {
-    [SHOW_USER_MENU]: (state, action) =>
+    [SHOW_USER_MENU]: state =>
       produce(state, draft => {
         console.log('SHOW_USER_MENU');
         draft.showUserMenu = true;
       }),
 
-    [HIDE_USER_MENU]: (state, action) =>
+    [HIDE_USER_MENU]: state =>
       produce(state, draft => {
         console.log('HIDE_USER_MENU');
         draft.showUserMenu = false;

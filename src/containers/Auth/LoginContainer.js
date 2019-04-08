@@ -7,7 +7,6 @@ import * as authActions from 'store/modules/auth';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import queryString from 'query-string';
-import { pender } from 'redux-pender/lib/utils';
 
 class LoginContainer extends Component {
   handleChangeEmail = e => {

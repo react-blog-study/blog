@@ -25,7 +25,7 @@ class SettingContainer extends Component {
   }
 
   onUpdateProfile = ({ username, short_intro }) => {
-    return this.props.SettingsActions.updateProfile(username, short_intro);
+    this.props.SettingsActions.updateProfile(username, short_intro);
   };
 
   render() {
