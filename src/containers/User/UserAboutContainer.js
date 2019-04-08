@@ -43,7 +43,7 @@ class UserAboutContainer extends Component {
     const { longIntro, self } = this.props;
     return (
       <UserAbout longIntro={longIntro} self={self}>
-        UserAboutContainer
+        UserAboutContainer  
       </UserAbout>
     );
   }
