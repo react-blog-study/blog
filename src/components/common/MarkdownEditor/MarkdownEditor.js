@@ -1,23 +1,36 @@
-// @flow
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
-import './MarkdownEditor.scss';
-
 import CodeMirror from 'codemirror';
+import './MarkdownEditor.scss';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+import 'codemirror/theme/dracula.css';
+import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror/addon/display/placeholder';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/jsx/jsx';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/shell/shell';
+import 'codemirror/mode/python/python';
+import 'codemirror/mode/go/go';
+import 'codemirror/mode/swift/swift';
+import 'codemirror/mode/clike/clike';
+import 'codemirror/addon/scroll/simplescrollbars.css';
 
 class MarkdownEditor extends Component {
   state = {};
-  textarea = React.createRef();
+  textarea = null;
   cm = null;
 
   initialize = () => {
     if (!CodeMirror) return;
     const { placeholder } = this.props;
+    console.log(placeholder);
+
     const cm = CodeMirror.fromTextArea(this.textarea, {
       mode: 'markdown',
       placeholder,
-      autofocus: true,
-      style: { display: 'block' },
       lineWrapping: true, // 내용이 너무 길면 다음 줄에 작성
     });
     this.cm = cm;
@@ -44,6 +57,8 @@ class MarkdownEditor extends Component {
   insertText = () => {
     const { cm } = this;
     const selection = cm.getSelection();
+    console.log('selection :: ', selection);
+
     if (selection.length > 0) {
       cm.replaceSelection(this.props.flash);
     } else {
@@ -60,7 +75,13 @@ class MarkdownEditor extends Component {
   render() {
     return (
       <div className="MarkdownEditor">
-        <TextareaAutosize ref={this.textarea} rows={5} maxRows={20} style={{ display: 'block' }} />
+        <TextareaAutosize
+          innerRef={ref => {
+            this.textarea = ref;
+          }}
+          rows={5}
+          maxRows={20}
+        />
       </div>
     );
   }

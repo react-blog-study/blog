@@ -1,16 +1,20 @@
 import React from 'react';
 import './UserAbout.scss';
+import MarkdownRender from '../../common/MarkdownRender/MarkdownRender';
 
 const UserAbout = ({ longIntro, self, onEditClick }) => {
+  console.log(longIntro);
+
   return (
     <div className="UserAbout">
       {longIntro ? (
         <>
           {self && (
-            <div className="eit-btn-wrapper">
-              <button>수정하기</button>
+            <div className="edit-btn-wrapper">
+              <button onClick={onEditClick}>수정하기</button>
             </div>
           )}
+          <MarkdownRender body={longIntro} />
         </>
       ) : (
         <div className="empty-about">

@@ -35,7 +35,7 @@ class UserAboutContainer extends Component {
     const { ProfileActions } = this.props;
     const message = message => <div style={{ fontSize: '1.1rem' }}>{message}</div>;
     try {
-      await ProfileActions.updateAbout(text);
+      await ProfileActions.updateLongIntro(text);
       toast(message('자기소개가 업데이트되었습니다.'), { type: 'success' });
     } catch (e) {
       toast(message('자기소개 업데이트 실패'), { type: 'error' });
@@ -55,7 +55,7 @@ class UserAboutContainer extends Component {
     ProfileActions.setSideVisibility(true);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps.longIntro !== this.props.longIntro) {
       this.setState({
         text: this.props.longIntro,
