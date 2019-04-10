@@ -14,7 +14,7 @@ export const setSideVisibility = createAction(SET_SIDE_VISIBILITY);
 
 const initialState = {
   profile: null,
-  side: false,
+  side: true,
 };
 
 export default handleActions(

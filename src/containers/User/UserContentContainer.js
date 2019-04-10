@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Tabs from 'components/user/Tab/Tabs';
+import Tabs from 'components/user/Tab';
+import UserTagView from 'components/user/UserTagView';
 import UserContentTemplate from 'components/user/UserContent/UserContentTemplate';
 import UserPostsSubpage from 'pages/user/UserPostsSubpage';
 import UserHistorySubpage from 'pages/user/UserHistorySubpage';
@@ -42,7 +43,7 @@ class UserContentContainer extends Component {
     return (
       <UserContentTemplate>
         <Tabs userId={userId} tab={tab} />
-        <UserContent>
+        <UserContent side={side && <UserTagView />}>
           <Route exact path="/@:userId" component={UserPostsSubpage} />
           <Route path="/@:userId/series" component={UserSeriesSubpage} />
           <Route path="/@:userId/history" component={UserHistorySubpage} />
@@ -59,7 +60,7 @@ const enhance = compose(
   connect(
     ({ profile, common }) => ({
       profile: profile.profile,
-      size: profile.side,
+      side: profile.side,
     }),
     dispatch => ({
       ProfileActions: bindActionCreators(profileActions, dispatch),
